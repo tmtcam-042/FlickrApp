@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "back-end for FlickrApp application, using NodeJS as backend language, Express as backend framework, unirest for API calls and nodemon for development purposes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmtcam-042/FlickrApp.git"
+  },
+  "keywords": [
+    "Flickr",
+    "API",
+    "search"
+  ],
+  "author": "Thomas Cameron",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tmtcam-042/FlickrApp/issues"
+  },
+  "homepage": "https://github.com/tmtcam-042/FlickrApp#readme",
+  "dependencies": {
+    "express": "^4.17.3",
+    "unirest": "^0.6.0"
+  }
+}
