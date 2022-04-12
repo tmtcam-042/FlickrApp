@@ -5,4 +5,4 @@ It performs basic user auth before allowing access, storing the user's tokens in
 Express is used as the backend framework, and React as the frontend framework.  
 
 To run Flickr Search, run 'npm i' from the main directory to install dependencies. 
-Then run 'npm start' from the /client directory, and 'nodemon' from the /server directory
+Then run 'npm start' from the /client directory, and 'nodemon' from the /server directory.
