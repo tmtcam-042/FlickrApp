@@ -8,14 +8,12 @@ function App() {
   const [picArray, setPicArray] = React.useState(null);
 
   const getPicArray = () => {
-    console.log("Hello");
     fetch('/api/search/' + tags)
       .then(response => response.json()) //Process fetched data as JSON
       .then(data => { 
         //For each photo in data, extract link to the image and store it in pictures
         let pictures = data.photo.map((pic) => {
           var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
-          console.log(tags);
           return(
             <div className="responsive">
               <div className="gallery">
@@ -44,6 +42,12 @@ function App() {
           name="search"
           pattern=".*\S.*" required 
           onChange={event => setTags(event.target.value.split(" "))}  
+          onKeyPress={event => {
+            if (event.key ==='Enter') {
+              getPicArray();
+              event.target.blur(); // Remove cursor from search bar to indicate search completion
+            }
+          }}
           />
           <button className="search-btn" type="button" onClick={getPicArray}>
             <span>Search</span>

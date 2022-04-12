@@ -50,7 +50,7 @@
   display: flex;
   flex-flow: wrap row;
   justify-content: space-evenly;
-  align-items: baseline; /*Most important style-impacting setting*/
+  align-items: center; /*Most important style-impacting setting*/
   row-gap: 10px;
 }
 
