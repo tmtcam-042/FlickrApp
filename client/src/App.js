@@ -7,17 +7,25 @@ function App() {
 
   const getPicArray = () => {
     fetch('/api/search/' + tags)
-      .then(response => {
+      .then(response => response.json())
+      .then(data => {
         console.log('Request received! Result:\n');
-        console.log(response);
-        let pictures = response.json().photo.map((pic) => {
+        console.log(data);
+        let pictures = data.photo.map((pic) => {
           var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
           return(
             <img alt={pic.title} src={srcPath}></img>
           )
         })
+        console.log('pictures: ');
+        console.log(pictures);
+        return(pictures);
       })
-      .then(response => setPicArray(response))
+      .then(pictures => {
+        console.log('Response: ');
+        console.log(pictures);
+        setPicArray(pictures);
+      })
   };
 
   return (
