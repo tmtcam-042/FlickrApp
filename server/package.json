@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/tmtcam-042/FlickrApp#readme",
   "dependencies": {
-    "express": "^4.17.3",
     "unirest": "^0.6.0"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3"
   }
 }

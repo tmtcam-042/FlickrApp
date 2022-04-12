@@ -1,11 +1,21 @@
+import React, {useState} from 'react';
+
 import './App.css';
 import './Search-bar.css';
-import logo from './logo.svg';
-import React from 'react';
+import logo from '../../logo.svg';
+import Login from '../Login/Login';
+import useToken from './useToken';
+
+
 
 function App() {
-  const [tags, setTags] = React.useState('');
-  const [picArray, setPicArray] = React.useState(null);
+  const [tags, setTags] = useState('');
+  const [picArray, setPicArray] = useState(null);
+  const { token, setToken } = useToken();
+
+  if(!token) {
+    return <Login setToken={setToken} />
+  }
 
   /*
   getPicArray performs a call to the backend with the tag string the user has entered into the webpage.
