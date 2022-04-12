@@ -11,7 +11,6 @@ import useToken from './useToken';
 function App() {
   const [tags, setTags] = useState('');
   const [picArray, setPicArray] = useState(null);
-
   const { token, setToken } = useToken();
 
   if(!token) {
