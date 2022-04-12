@@ -1,23 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
 
 function App() {
+  const [tags, setTags] = React.useState('');
+  const [picArray, setPicArray] = React.useState(null);
+
+  const getPicArray = () => {
+    fetch('/api/search/' + tags)
+      .then(response => response.json())
+      .then(data => {
+        console.log('Request received! Result:\n');
+        console.log(data);
+        let pictures = data.photo.map((pic) => {
+          var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
+          return(
+            <img alt={pic.title} src={srcPath}></img>
+          )
+        })
+        console.log('pictures: ');
+        console.log(pictures);
+        return(pictures);
+      })
+      .then(pictures => {
+        console.log('Response: ');
+        console.log(pictures);
+        setPicArray(pictures);
+      })
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Flickr Search</h1>
+      <input placeholder="cats, cute, fluffy" value={tags} onChange={event => setTags(event.target.value.split(" "))} /> {/* TODO: make input processing more resilient. */}
+      <button onClick={getPicArray}>Search</button>
+      <div>
+        {picArray}
+      </div>
     </div>
   );
 }
