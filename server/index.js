@@ -9,17 +9,16 @@ app.get('/api/search/:tags', (req, res) => {
       "method": "flickr.photos.search",
       "api_key": "3aec1ebfb8c286a5fd429415e85490e5",
       "tags": req.params.tags,
-      "per_page" : "10",
+      "per_page" : "100",
       "page": "1",
       "format": "json",
-      "nojsoncallback": "1"
+      "nojsoncallback": "1",
+      "safe_search": "1"
      });
 
   request.end(function (response) {
     if (response.error) throw new Error(response.error);
-
     res.json(response.body.photos || {});
-    console.log(response.body.photos);
   });
 
 });
