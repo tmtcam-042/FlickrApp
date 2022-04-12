@@ -18,13 +18,20 @@ function App() {
     return <Login setToken={setToken} />
   }
 
+  /*
+  getPicArray performs a call to the backend with the tag string the user has entered into the webpage.
+  Once it receives the result of that call, it processes it as JSON data and constructs links to the image
+  sources that match the user-submitted tags on Flickr. 
+  The function returns a div containing the sourced image and its title.
+  */
   const getPicArray = () => {
     fetch('/api/search/' + tags)
       .then(response => response.json()) //Process fetched data as JSON
       .then(data => { 
-        //For each photo in data, extract link to the image and store it in pictures
+        //For each photo in data, construct link to the image and return a div containing the image along with its title to pictures
         let pictures = data.photo.map((pic) => {
           var srcPath = 'https://farm'+pic.farm+'.staticflickr.com/'+pic.server+'/'+pic.id+'_'+pic.secret+'.jpg';
+          
           return(
             <div className="responsive">
               <div className="gallery">
@@ -35,10 +42,10 @@ function App() {
               </div>
             </div> 
           );
+
         })
-        return(pictures);
+        setPicArray(pictures)
       })
-      .then(pictures => setPicArray(pictures));
   };
 
 
@@ -52,10 +59,10 @@ function App() {
           type="text" 
           name="search"
           pattern=".*\S.*" required 
-          onChange={event => setTags(event.target.value.split(" "))}  
+          onChange={event => setTags(event.target.value.split(" "))} //Each key input to the search bar is sent to {tags}  
           onKeyPress={event => {
             if (event.key ==='Enter') {
-              getPicArray();
+              getPicArray(); 
               event.target.blur(); // Remove cursor from search bar to indicate search completion
             }
           }}

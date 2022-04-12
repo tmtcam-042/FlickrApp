@@ -12,6 +12,11 @@ app.use('/login', (req, res) => {
 });
 
 
+/*
+This GET request is called by the frontend function getPicArray. It constructs a call
+to Flickr's photo search API using unirest for readability, and returns a json
+file containing various information about images that match the submitted tags.
+*/
 app.get('/api/search/:tags', (req, res) => {
   const request = unirest("GET", "https://api.flickr.com/services/rest/");
   request.query({ 
@@ -27,7 +32,7 @@ app.get('/api/search/:tags', (req, res) => {
 
   request.end(function (response) {
     if (response.error) throw new Error(response.error);
-    res.json(response.body.photos || {});
+    res.json(response.body.photos || {}); // If the response from Flickr is null, return null to the frontend.
   });
 
 });
