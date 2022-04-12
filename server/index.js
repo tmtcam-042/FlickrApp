@@ -1,7 +1,16 @@
 const express = require('express');
+const cors = require('cors');
+const unirest = require("unirest");
 const app = express();
 const port = 3001;
-const unirest = require("unirest");
+
+app.use(cors());
+app.use('/login', (req, res) => {
+  res.send({
+    token: 'test123'
+  });
+});
+
 
 app.get('/api/search/:tags', (req, res) => {
   const request = unirest("GET", "https://api.flickr.com/services/rest/");
